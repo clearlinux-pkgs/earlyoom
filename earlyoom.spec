@@ -4,14 +4,17 @@
 #
 Name     : earlyoom
 Version  : 1.3
-Release  : 1
+Release  : 2
 URL      : https://github.com/rfjakob/earlyoom/archive/v1.3.tar.gz
 Source0  : https://github.com/rfjakob/earlyoom/archive/v1.3.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
+Requires: earlyoom-data = %{version}-%{release}
 Requires: earlyoom-license = %{version}-%{release}
+Requires: earlyoom-services = %{version}-%{release}
 BuildRequires : buildreq-golang
+BuildRequires : pandoc
 BuildRequires : systemd
 
 %description
@@ -20,12 +23,28 @@ The Early OOM Daemon
 [![Build Status](https://api.travis-ci.org/rfjakob/earlyoom.svg)](https://travis-ci.org/rfjakob/earlyoom)
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+%package data
+Summary: data components for the earlyoom package.
+Group: Data
+
+%description data
+data components for the earlyoom package.
+
+
 %package license
 Summary: license components for the earlyoom package.
 Group: Default
 
 %description license
 license components for the earlyoom package.
+
+
+%package services
+Summary: services components for the earlyoom package.
+Group: Systemd services
+
+%description services
+services components for the earlyoom package.
 
 
 %prep
@@ -37,7 +56,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578436091
+export SOURCE_DATE_EPOCH=1578437165
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -50,15 +69,27 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1578436091
+export SOURCE_DATE_EPOCH=1578437165
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/earlyoom
 cp %{_builddir}/earlyoom-1.3/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
 %make_install
+## install_append content
+install -D %{buildroot}/etc/default/earlyoom %{buildroot}/usr/share/defaults/earlyoom/earlyoom
+install -D %{buildroot}/etc/systemd/system/earlyoom.service %{buildroot}/usr/lib/systemd/system/earlyoom.service
+## install_append end
 
 %files
 %defattr(-,root,root,-)
 
+%files data
+%defattr(-,root,root,-)
+/usr/share/defaults/earlyoom/earlyoom
+
 %files license
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
+
+%files services
+%defattr(-,root,root,-)
+/usr/lib/systemd/system/earlyoom.service

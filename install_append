@@ -1,0 +1,2 @@
+install -D %{buildroot}/etc/default/earlyoom %{buildroot}/usr/share/defaults/earlyoom/earlyoom
+install -D %{buildroot}/etc/systemd/system/earlyoom.service %{buildroot}/usr/lib/systemd/system/earlyoom.service
