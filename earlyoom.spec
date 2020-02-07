@@ -4,7 +4,7 @@
 #
 Name     : earlyoom
 Version  : 1.3
-Release  : 3
+Release  : 5
 URL      : https://github.com/rfjakob/earlyoom/archive/v1.3.tar.gz
 Source0  : https://github.com/rfjakob/earlyoom/archive/v1.3.tar.gz
 Summary  : No detailed summary available
@@ -18,6 +18,8 @@ Requires: earlyoom-services = %{version}-%{release}
 BuildRequires : buildreq-golang
 BuildRequires : pandoc
 BuildRequires : systemd
+Patch1: 0001-Add-clear-telemetry-example.patch
+Patch2: 0002-Clear-Telemetry-earlyoom-probe.patch
 
 %description
 The Early OOM Daemon
@@ -71,13 +73,15 @@ services components for the earlyoom package.
 %prep
 %setup -q -n earlyoom-1.3
 cd %{_builddir}/earlyoom-1.3
+%patch1 -p1
+%patch2 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1578437511
+export SOURCE_DATE_EPOCH=1581119915
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -90,7 +94,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1578437511
+export SOURCE_DATE_EPOCH=1581119915
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/earlyoom
 cp %{_builddir}/earlyoom-1.3/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
@@ -98,6 +102,7 @@ cp %{_builddir}/earlyoom-1.3/LICENSE %{buildroot}/usr/share/package-licenses/ear
 ## install_append content
 install -D %{buildroot}/etc/default/earlyoom %{buildroot}/usr/share/defaults/earlyoom/earlyoom
 install -D %{buildroot}/etc/systemd/system/earlyoom.service %{buildroot}/usr/lib/systemd/system/earlyoom.service
+install -m0755 earlyoom-clr-telemetry %{buildroot}/usr/bin/earlyoom-clr-telemetry
 ## install_append end
 
 %files
@@ -106,6 +111,7 @@ install -D %{buildroot}/etc/systemd/system/earlyoom.service %{buildroot}/usr/lib
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/earlyoom
+/usr/bin/earlyoom-clr-telemetry
 
 %files data
 %defattr(-,root,root,-)

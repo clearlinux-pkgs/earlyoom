@@ -1,0 +1,30 @@
+From 5782b555d42fea6d9caf225fc45db69bcf8a8fc6 Mon Sep 17 00:00:00 2001
+From: Alex Jaramillo <alex.v.jaramillo@intel.com>
+Date: Fri, 7 Feb 2020 23:16:49 +0000
+Subject: [PATCH] Add clear telemetry example
+
+Include an example of using clear linux telemetry to report earlyoom
+notifications.
+
+Signed-off-by: Alex Jaramillo <alex.v.jaramillo@intel.com>
+---
+ earlyoom.default | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/earlyoom.default b/earlyoom.default
+index 7a0c8cb..2965769 100644
+--- a/earlyoom.default
++++ b/earlyoom.default
+@@ -15,6 +15,9 @@ EARLYOOM_ARGS="-r 60"
+ # Available minimum memory 15% and free minimum swap 5%
+ # EARLYOOM_ARGS="-m 15 -s 5"
+ 
++# Report notifications using clear linux telemetry
++# EARLYOOM_ARGS="-N earlyoom-clr-telemetry"
++
+ # Avoid killing processes whose name matches this regexp
+ # EARLYOOM_ARGS="--avoid '(^|/)(init|X|sshd|firefox)$'"
+ 
+-- 
+2.25.0
+

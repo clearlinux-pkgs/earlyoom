@@ -1,0 +1,50 @@
+From e8aa41b87e18e91ed721ec4bd2200555788a0bd7 Mon Sep 17 00:00:00 2001
+From: Alex Jaramillo <alex.v.jaramillo@intel.com>
+Date: Fri, 7 Feb 2020 23:22:08 +0000
+Subject: [PATCH] Clear Telemetry earlyoom probe
+
+Utility to receive a notification from earlyoom and send it to clear
+linux telemetry.
+
+Signed-off-by: Alex Jaramillo <alex.v.jaramillo@intel.com>
+---
+ earlyoom-clr-telemetry | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100755 earlyoom-clr-telemetry
+
+diff --git a/earlyoom-clr-telemetry b/earlyoom-clr-telemetry
+new file mode 100755
+index 0000000..83ee444
+--- /dev/null
++++ b/earlyoom-clr-telemetry
+@@ -0,0 +1,27 @@
++#!/bin/bash
++
++#
++# Clear linux telemetry probe for earlyoom notifications, make
++# sure to enable this scrips as an extra argument in
++# /etc/default/earlyoom
++#
++
++set -e
++ARGS=( "$@" )
++if [ $# != 4 ]; then
++        echo "Expected 4 arguments, got $#"
++        exit -1
++fi
++
++RECORD_GEN=/usr/bin/telem-record-gen
++CLR_EARLYOOM_CLASS="org.clearlinux/earlyoom/${ARGS[1]}"
++
++if [ -x "$RECORD_GEN" ]; then
++	$RECORD_GEN --class $CLR_EARLYOOM_CLASS --severity 2 --payload "${ARGS[2]}: ${ARGS[3]}"
++else
++        echo "*"
++	echo "* $RECORD_GEN not found. Telemetrics bundle is required"
++        echo "* To add telemetry use:"
++	echo "* swupd bundle-add telemetrics"
++        echo "*"
++fi
+-- 
+2.25.0
+
