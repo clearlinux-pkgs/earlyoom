@@ -4,7 +4,7 @@
 #
 Name     : earlyoom
 Version  : 1.5
-Release  : 10
+Release  : 11
 URL      : https://github.com/rfjakob/earlyoom/archive/v1.5/earlyoom-1.5.tar.gz
 Source0  : https://github.com/rfjakob/earlyoom/archive/v1.5/earlyoom-1.5.tar.gz
 Summary  : No detailed summary available
@@ -83,20 +83,20 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1585764390
+export SOURCE_DATE_EPOCH=1585934905
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
-make  %{?_smp_mflags}
+make  %{?_smp_mflags}  PREFIX=/usr
 
 
 %install
-export SOURCE_DATE_EPOCH=1585764390
+export SOURCE_DATE_EPOCH=1585934905
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/earlyoom
 cp %{_builddir}/earlyoom-1.5/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
