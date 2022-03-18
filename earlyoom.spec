@@ -4,7 +4,7 @@
 #
 Name     : earlyoom
 Version  : 1.7
-Release  : 15
+Release  : 16
 URL      : https://github.com/rfjakob/earlyoom/archive/v1.7/earlyoom-1.7.tar.gz
 Source0  : https://github.com/rfjakob/earlyoom/archive/v1.7/earlyoom-1.7.tar.gz
 Summary  : No detailed summary available
