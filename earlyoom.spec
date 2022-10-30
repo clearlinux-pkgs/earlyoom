@@ -4,7 +4,7 @@
 #
 Name     : earlyoom
 Version  : 1.7
-Release  : 16
+Release  : 17
 URL      : https://github.com/rfjakob/earlyoom/archive/v1.7/earlyoom-1.7.tar.gz
 Source0  : https://github.com/rfjakob/earlyoom/archive/v1.7/earlyoom-1.7.tar.gz
 Summary  : No detailed summary available
@@ -15,7 +15,6 @@ Requires: earlyoom-data = %{version}-%{release}
 Requires: earlyoom-license = %{version}-%{release}
 Requires: earlyoom-man = %{version}-%{release}
 Requires: earlyoom-services = %{version}-%{release}
-BuildRequires : buildreq-golang
 BuildRequires : pandoc
 BuildRequires : systemd
 Patch1: 0001-Add-clear-telemetry-example.patch
@@ -84,7 +83,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1646505316
+export SOURCE_DATE_EPOCH=1667094552
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -97,10 +96,10 @@ make  %{?_smp_mflags}  PREFIX=/usr
 
 
 %install
-export SOURCE_DATE_EPOCH=1646505316
+export SOURCE_DATE_EPOCH=1667094552
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/earlyoom
-cp %{_builddir}/earlyoom-1.7/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
+cp %{_builddir}/earlyoom-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b
 %make_install PREFIX=/usr
 ## install_append content
 install -D %{buildroot}/etc/default/earlyoom %{buildroot}/usr/share/defaults/earlyoom/earlyoom
