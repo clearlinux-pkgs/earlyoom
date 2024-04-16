@@ -1,0 +1,10 @@
+/builddir/build/BUILDROOT/earlyoom-1.8-19.x86_64/etc/:
+/builddir/build/BUILDROOT/earlyoom-1.8-19.x86_64/etc/default:
+/builddir/build/BUILDROOT/earlyoom-1.8-19.x86_64/etc/systemd/system:
+/builddir/build/BUILDROOT/earlyoom-1.8-19.x86_64/etc/systemd:
+default
+earlyoom
+earlyoom.service
+system
+systemd
+systemd' ']'
