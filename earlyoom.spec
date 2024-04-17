@@ -6,10 +6,10 @@
 # autospec commit: 5905be9
 #
 Name     : earlyoom
-Version  : 1.8
-Release  : 19
-URL      : https://github.com/rfjakob/earlyoom/archive/v1.8/earlyoom-1.8.tar.gz
-Source0  : https://github.com/rfjakob/earlyoom/archive/v1.8/earlyoom-1.8.tar.gz
+Version  : 1.8.1
+Release  : 20
+URL      : https://github.com/rfjakob/earlyoom/archive/v1.8.1/earlyoom-1.8.1.tar.gz
+Source0  : https://github.com/rfjakob/earlyoom/archive/v1.8.1/earlyoom-1.8.1.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
@@ -78,12 +78,12 @@ services components for the earlyoom package.
 
 
 %prep
-%setup -q -n earlyoom-1.8
-cd %{_builddir}/earlyoom-1.8
+%setup -q -n earlyoom-1.8.1
+cd %{_builddir}/earlyoom-1.8.1
 %patch -P 1 -p1
 %patch -P 2 -p1
 pushd ..
-cp -a earlyoom-1.8 buildavx2
+cp -a earlyoom-1.8.1 buildavx2
 popd
 
 %build
@@ -91,7 +91,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1713276749
+export SOURCE_DATE_EPOCH=1713362213
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -134,7 +134,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1713276749
+export SOURCE_DATE_EPOCH=1713362213
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/earlyoom
 cp %{_builddir}/earlyoom-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/earlyoom/49c65c4ad5a142b45b01486ac9df8f15d9d6d30b || :
